@@ -4,7 +4,6 @@ import os
 import unittest
 
 import apache_beam as beam
-import pytest
 from apache_beam.io import ReadFromText
 from apache_beam.testing.test_pipeline import TestPipeline
 from apache_beam.testing.util import assert_that, equal_to
@@ -12,7 +11,6 @@ from apache_beam.testing.util import assert_that, equal_to
 from main import run, ComputeTransactions, ValidateRow
 
 
-@pytest.mark.examples_postcommit
 class TestTransactionPipeline(unittest.TestCase):
 
     def test_e2e_pipeline(self):
@@ -45,9 +43,9 @@ class TestTransactionPipeline(unittest.TestCase):
         expected_result = [('2017-03-18', 2102.22), ('2017-08-31', 13700000023.08), ('2018-02-27', 129.12)]
 
         with TestPipeline() as p:
-            input = p | ReadFromText(os.path.join(os.getcwd(), 'test/resources/e2e-test-data.csv'),
+            input_lines = p | ReadFromText(os.path.join(os.getcwd(), 'test/resources/e2e-test-data.csv'),
                                      skip_header_lines=True)
-            output = input | ComputeTransactions()
+            output = input_lines | ComputeTransactions()
 
             print(output)
             assert_that(
@@ -62,9 +60,9 @@ class TestTransactionPipeline(unittest.TestCase):
                            '2018-02-27 16:04:11 UTC,wallet00005f83196ec58e4ffe,wallet00001866cb7e0f09a890,129.12']
 
         with TestPipeline() as p:
-            input = p | ReadFromText(os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-row.csv'),
+            input_lines = p | ReadFromText(os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-row.csv'),
                                      skip_header_lines=True)
-            output = input | beam.ParDo(ValidateRow())
+            output = input_lines | beam.ParDo(ValidateRow())
 
             print(output)
             assert_that(

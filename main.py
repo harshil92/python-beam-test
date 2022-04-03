@@ -64,12 +64,12 @@ def run(argv=None, save_main_session=True):
 
     with beam.Pipeline(options=pipeline_options) as pipeline:
         lines = pipeline | 'Read' >> ReadFromText(known_args.input, skip_header_lines=True)
-        counts = lines | ComputeTransactions()
+        date_total_amount = lines | ComputeTransactions()
 
         def csv_format_result(date, total_amount):
             return '%s, %s' % (date, total_amount)
 
-        output = counts | 'Format' >> beam.MapTuple(csv_format_result)
+        output = date_total_amount | 'Format' >> beam.MapTuple(csv_format_result)
 
         output | 'Write' >> WriteToText(known_args.output, num_shards=1, shard_name_template='',
                                         file_name_suffix=".csv.gz", compression_type=CompressionTypes.GZIP,
