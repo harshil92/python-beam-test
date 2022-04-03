@@ -11,7 +11,9 @@ from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
 
 
-class validate_row(beam.DoFn):
+class ValidateRow(beam.DoFn):
+    """The function checks if the row contains 4 columns. On failure, it will increment a counter and discard that
+    row."""
     def __init__(self):
         self.failing_row_count = Metrics.counter('main', 'failing_row_count')
 
@@ -24,9 +26,10 @@ class validate_row(beam.DoFn):
 
 
 class ComputeTransactions(beam.PTransform):
+    """This function parses the lines and applies the transforms."""
     def expand(self, pcoll):
         return pcoll \
-               | 'validate row' >> beam.ParDo(validate_row()) \
+               | 'validate row' >> beam.ParDo(ValidateRow()) \
                | 'Split' >> beam.Map(lambda line: line.split(",")) \
                | 'Schema' >> beam.Map(lambda field: beam.Row(
                                         timestamp=datetime.datetime.fromisoformat(field[0][0:19]),
@@ -40,7 +43,7 @@ class ComputeTransactions(beam.PTransform):
 
 
 def run(argv=None, save_main_session=True):
-    """Main entry point; defines and runs the wordcount pipeline."""
+    """Main entry point; defines and runs the pipeline."""
     result_path = os.path.join(os.getcwd(), 'output/result')
 
     parser = argparse.ArgumentParser()
