@@ -1,0 +1,3 @@
+apache-beam[gcp]
+pytest~=7.1.1
+setuptools~=58.1.0
