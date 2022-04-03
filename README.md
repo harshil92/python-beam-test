@@ -14,8 +14,8 @@ pip install -r requirements.txt
 #### Run locally using DirectRunner
 ```
 python main.py \
---input path/to/file \
---output path/to/output/file
+--input path/to/file \ #optional
+--output path/to/output/file  #optional
 ```
 - Both options contain default value so they are optional. 
 
