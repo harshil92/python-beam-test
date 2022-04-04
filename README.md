@@ -6,6 +6,7 @@ This pipeline reads transaction data and applies the following filters and trans
 4. Compresses the csv file into gzip and stores it in the `output` folder.
 
 ### Install
+Python 3.10 was used in this project.
 ```
 pip install -r requirements.txt
 ```
