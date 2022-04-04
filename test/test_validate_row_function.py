@@ -1,4 +1,3 @@
-import gzip
 import logging
 import os
 import unittest
@@ -9,7 +8,6 @@ from apache_beam.testing.test_pipeline import TestPipeline
 from apache_beam.testing.util import assert_that, equal_to
 
 from ValidateRow import ValidateRow
-from main import run, ComputeTransactions
 
 E2E_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-data.csv')
 INVALID_ROW_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-row.csv')
