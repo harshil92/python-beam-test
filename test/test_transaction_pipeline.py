@@ -12,7 +12,7 @@ from main import run, ComputeTransactions
 E2E_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-data.csv')
 INVALID_ROW_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-row.csv')
 INVALID_TIMESTAMP_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-timestamp.csv')
-TEST_RESULT_PATH = os.path.join(os.getcwd(), 'output/test_result')
+TEST_RESULT_PATH = os.path.join(os.getcwd(), 'output/unittest_result')
 
 
 class TestTransactionPipeline(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestTransactionPipeline(unittest.TestCase):
              '--output=%s' % TEST_RESULT_PATH],
             save_main_session=False)
 
-        with gzip.open(os.path.join(os.getcwd(), 'output/test_result.csv.gz'), 'r') as f:
+        with gzip.open(os.path.join(os.getcwd(), 'output/unittest_result.csv.gz'), 'r') as f:
             lines = f.readlines()
             u_lines = listDecode(lines)
 
@@ -39,7 +39,7 @@ class TestTransactionPipeline(unittest.TestCase):
              '--output=%s' % TEST_RESULT_PATH],
             save_main_session=False)
 
-        with gzip.open(os.path.join(os.getcwd(), 'output/test_result.csv.gz'), 'r') as f:
+        with gzip.open(os.path.join(os.getcwd(), 'output/unittest_result.csv.gz'), 'r') as f:
             lines = f.readlines()
             u_lines = listDecode(lines)
 

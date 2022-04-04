@@ -13,7 +13,6 @@ E2E_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-data.csv
 INVALID_ROW_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-row.csv')
 INVALID_TIMESTAMP_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-timestamp.csv')
 INVALID_TAMOUNT_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-test-invalid-transaction_amount.csv')
-TEST_RESULT_PATH = os.path.join(os.getcwd(), 'output/test_result')
 
 
 class TestValidateRowFunction(unittest.TestCase):
