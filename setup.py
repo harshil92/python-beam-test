@@ -1,4 +1,5 @@
 import setuptools
+
 REQUIRED_PACKAGES = []
 
 PACKAGE_NAME = 'python_beam_test'
@@ -10,7 +11,7 @@ setuptools.setup(
     description='This pipeline processes transaction data.',
     install_requires=REQUIRED_PACKAGES,
     packages=setuptools.find_packages(),
-    package_data= {
+    package_data={
         PACKAGE_NAME: [],
     },
 )
