@@ -17,7 +17,7 @@ INVALID_TAMOUNT_TEST_DATA_PATH = os.path.join(os.getcwd(), 'test/resources/e2e-t
 
 class TestValidateRowFunction(unittest.TestCase):
 
-    def test_validate_row(self):
+    def test_validate_row_missing_totalAmount_value(self):
         expected_result = ['2009-01-09 02:54:25 UTC,wallet00000e719adfeaa64b5a,wallet00001866cb7e0f09a890,1021101.99',
                            '2017-01-01 04:22:23 UTC,wallet00000e719adfeaa64b5a,wallet00001e494c12b3083634,19.95',
                            '2017-03-18 14:09:16 UTC,wallet00001866cb7e0f09a890,wallet00001e494c12b3083634,2102.22',
