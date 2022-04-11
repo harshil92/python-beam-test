@@ -2,6 +2,7 @@ import argparse
 import datetime
 import logging
 import os
+from decimal import Decimal
 
 import apache_beam as beam
 from apache_beam.io import ReadFromText, WriteToText
@@ -23,7 +24,7 @@ class ComputeTransactions(beam.PTransform):
                                         timestamp=datetime.datetime.fromisoformat(field[0][0:19]),
                                         origin=field[1],
                                         destination=field[2],
-                                        transaction_amount=float(field[3]))) \
+                                        transaction_amount=Decimal(field[3]))) \
                | 'Filter amount > 20' >> beam.Filter(lambda row: row.transaction_amount > 20) \
                | 'Exclude year < 2010' >> beam.Filter(lambda row: row.timestamp.year > 2009) \
                | 'Reformat' >> beam.Map(lambda row: (str(row.timestamp.date()), row.transaction_amount)) \
